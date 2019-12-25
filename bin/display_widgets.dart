@@ -1,7 +1,26 @@
 import 'dart:io';
+import 'package:args/args.dart';
 
 /// The command line interface for scanning, building and starting the showcase applicaiton
 void main(List<String> arguments) async {
+
+  final parser = ArgParser()
+    ..addOption("platform", abbr: 'p', defaultsTo: "desktop");
+
+  var argResults = parser.parse(arguments);
+  var platformArg = argResults["platform"];
+
+
+  var platform = platformArg;
+  if(platformArg == "desktop") {
+    if(Platform.isWindows) {
+      platform = "windows";
+    } else if(Platform.isMacOS) {
+      platform = "macos";
+    } else if(Platform.isLinux) {
+      platform = "linux";
+    }
+  }
 
 
   var projectPath = Uri.base.toFilePath(windows: Platform.isWindows);
@@ -36,7 +55,7 @@ void main(List<String> arguments) async {
 
   print("Running it ...");
   var flutterRes = await Process.start(
-    "flutter run -dwindows -tlib/\$categorizer_main.dart",
+    "flutter run -d $platform -tlib/\$categorizer_main.dart",
     [],
     // TODO take this from command line
     //workingDirectory: "C://Users//Norbert//workspace//design_120fps",
