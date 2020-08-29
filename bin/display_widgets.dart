@@ -5,10 +5,12 @@ import 'package:args/args.dart';
 void main(List<String> arguments) async {
 
   final parser = ArgParser()
-    ..addOption("platform", abbr: 'p', defaultsTo: "desktop");
+    ..addOption("platform", abbr: 'p', defaultsTo: "desktop")
+    ..addOption("flutter", abbr: 'f', defaultsTo: "flutter");
 
   var argResults = parser.parse(arguments);
   var platformArg = argResults["platform"];
+  String flutter = argResults["flutter"];
 
 
   var platform = platformArg;
@@ -42,7 +44,7 @@ void main(List<String> arguments) async {
   //TODO abstract these shell calls
   // TODO call pub get in other project before runnning builder
   var res = await Process.start(
-      "flutter pub run build_runner build lib -ccategorizer",
+      "$flutter pub run build_runner build lib -ccategorizer --delete-conflicting-outputs ",
       [],
       //workingDirectory: "C://Users//Norbert//workspace//design_120fps",
       runInShell: true,
@@ -55,7 +57,7 @@ void main(List<String> arguments) async {
 
   print("Running it ...");
   var flutterRes = await Process.start(
-    "flutter run -d $platform -tlib/\$categorizer_main.dart",
+    "$flutter run -d $platform -tlib/\$categorizer_main.dart",
     [],
     // TODO take this from command line
     //workingDirectory: "C://Users//Norbert//workspace//design_120fps",

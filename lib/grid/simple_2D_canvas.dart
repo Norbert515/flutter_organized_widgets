@@ -124,7 +124,7 @@ class _Simple2DCanvasState extends State<Simple2DCanvas> {
   }
 }
 
-class Positioned2 extends ParentDataWidget<Stack2> {
+class Positioned2 extends ParentDataWidget<StackParentData> {
   /// Creates a widget that controls where a child of a [Stack] is positioned.
   ///
   /// Only two out of the three horizontal values ([left], [right],
@@ -358,6 +358,9 @@ class Positioned2 extends ParentDataWidget<Stack2> {
     properties.add(DoubleProperty('width', width, defaultValue: null));
     properties.add(DoubleProperty('height', height, defaultValue: null));
   }
+
+  @override
+  Type get debugTypicalAncestorWidgetClass => Stack2;
 }
 
 class Stack2 extends MultiChildRenderObjectWidget {
