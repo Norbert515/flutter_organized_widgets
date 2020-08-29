@@ -2,6 +2,10 @@
 
 Display all stand alone widgets in a nice UI
 
+
+
+![Video](https://github.com/Norbert515/flutter_organized_widgets/blob/master/github_assets/gallery.gif)
+
 ## How to install
 
 
